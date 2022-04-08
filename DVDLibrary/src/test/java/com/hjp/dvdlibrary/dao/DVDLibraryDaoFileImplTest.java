@@ -81,4 +81,18 @@ public class DVDLibraryDaoFileImplTest {
         assertTrue( retrievedList.contains(dvd2) , "List should contain title2" );
     }
     
+    @Test
+    public void testAddUpdateGetDVD() throws Exception {
+        //ARRANGE
+        DVD dvd = new DVD("title1","release","rating","director","studio","note");
+        testDao.addDVD(dvd);
+        String title = dvd.getTitle();
+        
+        dvd.setRating("NewRating");
+        dvd.setDirector("NewDirector");
+        
+        //ACT
+        testDao.updateDVD(title, dvd);
+        testDao.updateDVD(title, dvd);
+    }
 }
