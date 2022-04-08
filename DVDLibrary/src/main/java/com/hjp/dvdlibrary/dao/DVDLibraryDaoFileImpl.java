@@ -17,9 +17,17 @@ import java.io.FileNotFoundException;
  * @author Henry Perrottet
  */
 public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
-    private List<DVD> DVDList = new ArrayList<>();
-    private static final String DATA_FILE = "DVD_file.txt";
-    private static final String DELIMITER = "::";
+    private final List<DVD> DVDList = new ArrayList<>();
+    private final String DATA_FILE;
+    private final String DELIMITER = "::";
+    
+    public DVDLibraryDaoFileImpl(){
+        this.DATA_FILE = "DVD_file.txt";
+    }
+    
+    public DVDLibraryDaoFileImpl(String _dataFile){
+        this.DATA_FILE = _dataFile;
+    }
     
     public boolean checkDuplicate(DVD _DVD) throws DVDLibraryDaoException {
         loadDVDList();
