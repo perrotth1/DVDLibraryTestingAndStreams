@@ -12,6 +12,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
+import java.time.LocalDate;
+import java.util.stream.Collectors;
+
 /**
  *
  * @author Henry Perrottet
@@ -159,4 +162,27 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDaoAgg {
             }
         } 
     }
+
+    @Override
+    public List<DVD> getDVDInLastNYears(int _years) {
+        int yearNow = LocalDate.now().getYear();
+        return DVDList.stream()
+                .filter((p) -> Integer.parseInt(p.getReleaseDate().split("/")[2]) >= yearNow-_years )
+                .collect(Collectors.toList());                          
+    }
+
+    @Override
+    public List<DVD> getDVDByRating(String _rating) {
+        return DVDList.stream()
+                .filter((p) -> p.getRating().equalsIgnoreCase(_rating))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<DVD> getDVDByDirector(String _director) {
+        return DVDList.stream()
+                .filter((p) -> p.getDirector().contains(_director) || p.getDirector().equalsIgnoreCase(_director))
+                .collect(Collectors.toList());
+    }
+
 }
