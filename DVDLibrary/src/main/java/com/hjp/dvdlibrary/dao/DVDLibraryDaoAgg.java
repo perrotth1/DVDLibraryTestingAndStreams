@@ -10,13 +10,13 @@ import java.util.List;
  * @author Henry
  */
 public interface DVDLibraryDaoAgg extends DVDLibraryDao {
-    
+
     List<DVD> getDVDInLastNYears(int _years);
     List<DVD> getDVDByRating(String _rating);
     List<DVD> getDVDByDirector(String _director);
-    
+
     /**
-     * 
+     *
     Henry:
     Find all movies released in the last N years
     Find all the movies with a given MPAA rating
@@ -32,4 +32,7 @@ public interface DVDLibraryDaoAgg extends DVDLibraryDao {
     Find the oldest movie in your collection
     Find the average number of notes associated with movies in your collection
      */
+    List<DVD> searchDVDByStudio(String _studio);
+
+    double getAverageAgeOfMovies();
 }
