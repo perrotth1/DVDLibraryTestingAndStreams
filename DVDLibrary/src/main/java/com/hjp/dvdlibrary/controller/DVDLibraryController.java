@@ -199,7 +199,7 @@ public void run() {
         view.listDVD( results );
         view.displayContinue();
     }
-    public void getDVDInLastNYears(){
+    public void getDVDInLastNYears() throws DVDLibraryDaoException {
         view.bar();
         view.displayGetDVDInLastYearsBanner();
         int years = view.readYearsForQuery();

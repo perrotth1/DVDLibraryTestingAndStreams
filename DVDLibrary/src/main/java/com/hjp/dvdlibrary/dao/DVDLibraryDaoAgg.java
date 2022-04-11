@@ -12,9 +12,9 @@ import java.util.Map;
  */
 public interface DVDLibraryDaoAgg extends DVDLibraryDao {
 
-    List<DVD> getDVDInLastNYears(int _years);
-    List<DVD> getDVDByRating(String _rating);
-    Map<String, List<DVD>> getDVDByDirector(String _director);
+    List<DVD> getDVDInLastNYears(int _years) throws DVDLibraryDaoException ;
+    List<DVD> getDVDByRating(String _rating) throws DVDLibraryDaoException ;
+    Map<String, List<DVD>> getDVDByDirector(String _director) throws DVDLibraryDaoException ;
 
     /**
      *
@@ -33,7 +33,7 @@ public interface DVDLibraryDaoAgg extends DVDLibraryDao {
     Find the oldest movie in your collection
     Find the average number of notes associated with movies in your collection
      */
-    List<DVD> searchDVDByStudio(String _studio);
+    List<DVD> searchDVDByStudio(String _studio) throws DVDLibraryDaoException ;
 
-    double getAverageAgeOfMovies();
+    double getAverageAgeOfMovies() throws DVDLibraryDaoException ;
 }

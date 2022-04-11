@@ -169,14 +169,16 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDaoAgg {
     }
 
     @Override
-    public List<DVD> searchDVDByStudio(String _studio) {
+    public List<DVD> searchDVDByStudio(String _studio) throws DVDLibraryDaoException {
+        loadDVDList();
         return DVDList.stream()
                 .filter(dvd -> dvd.getStudio().equals(_studio))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public double getAverageAgeOfMovies() {
+    public double getAverageAgeOfMovies() throws DVDLibraryDaoException {
+        loadDVDList();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         LocalDate today = LocalDate.now();
 
@@ -192,7 +194,8 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDaoAgg {
     }
 
     @Override
-    public List<DVD> getDVDInLastNYears(int _years) {
+    public List<DVD> getDVDInLastNYears(int _years) throws DVDLibraryDaoException  {
+        loadDVDList();
         int yearNow = LocalDate.now().getYear();
         return DVDList.stream()
                 .filter((p) -> Integer.parseInt(p.getReleaseDate().split("/")[2]) >= yearNow-_years )
@@ -200,14 +203,16 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDaoAgg {
     }
 
     @Override
-    public List<DVD> getDVDByRating(String _rating) {
+    public List<DVD> getDVDByRating(String _rating) throws DVDLibraryDaoException  {
+        loadDVDList();
         return DVDList.stream()
                 .filter((p) -> p.getRating().equalsIgnoreCase(_rating))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Map<String, List<DVD>> getDVDByDirector(String _director) {
+    public Map<String, List<DVD>> getDVDByDirector(String _director) throws DVDLibraryDaoException {
+        loadDVDList();
         return DVDList.stream()
                 .filter((p) -> p.getDirector().contains(_director) || p.getDirector().equalsIgnoreCase(_director))
                 .collect(Collectors.groupingBy( (p) -> p.getRating() ));
