@@ -13,15 +13,15 @@ import java.util.List;
 public class DVDLibraryController {
     private DVDLibraryView view;
     private DVDLibraryDao dao;
-    
+
     public DVDLibraryController(DVDLibraryView _view, DVDLibraryDao _dao) {
         this.view = _view;
         this.dao = _dao;
     }
-    
+
 public void run() {
         boolean keepGoing = true;
-        
+
         try{
             while(keepGoing) {
                 switch(displayMenuGetSelect()){
@@ -33,13 +33,13 @@ public void run() {
                         break;
                     case 3:
                         editDVD();
-                        break;                    
-                    case 4:         
+                        break;
+                    case 4:
                         listDVD();
-                        break;                    
-                    case 5:  
+                        break;
+                    case 5:
                         showDVD();
-                        break;                    
+                        break;
                     case 6:
                         searchDVD();
                         break;
@@ -55,9 +55,9 @@ public void run() {
         catch(Exception e) {
             view.displayError(e.getMessage());
         }
-        
+
     }
-    
+
     public int displayMenuGetSelect() {
         view.displayMenu();
         return view.getSelection();
@@ -80,7 +80,7 @@ public void run() {
         }
         view.displayContinue();
     }
-    
+
     public void removeDVD() throws DVDLibraryDaoException{
         view.bar();
         view.displayRemoveDVDBanner();
@@ -98,7 +98,7 @@ public void run() {
         view.displayContinue();
     }
     public void editDVD() throws DVDLibraryDaoException{
-        
+
         view.bar();
         view.displayEditDVDBanner();
         String title = view.readTitle();
@@ -113,22 +113,22 @@ public void run() {
             while(keepGoing){
                 view.printDVD(updatedDVD);
                 switch( view.displayEditMenuGetSelect() ){
-                    case 1: 
+                    case 1:
                         updatedDVD.setTitle( view.readTitle() );
                         break;
-                    case 2: 
+                    case 2:
                         updatedDVD.setReleaseDate( view.readReleaseDate() );
                         break;
-                    case 3: 
+                    case 3:
                         updatedDVD.setRating( view.readRating() );
                         break;
-                    case 4: 
+                    case 4:
                         updatedDVD.setDirector( view.readDirector() );
                         break;
-                    case 5: 
+                    case 5:
                         updatedDVD.setStudio( view.readStudio() );
                         break;
-                    case 6: 
+                    case 6:
                         updatedDVD.setNote( view.readNote() );
                         break;
                     case 0:
@@ -136,7 +136,7 @@ public void run() {
                         keepGoing = false;
                         break;
                 }
-                if(keepGoing){  
+                if(keepGoing){
                     dao.updateDVD(title, updatedDVD);
                     view.displaySuccess();
                     if( view.displayEditAgain() == false ){
@@ -146,14 +146,14 @@ public void run() {
             }
         }
     }
-    
+
     public void listDVD() throws DVDLibraryDaoException{
         view.bar();
         view.displayListDVDBanner();
         view.listDVD( dao.listDVD() );
         view.displayContinue();
     }
-    
+
     public void showDVD() throws DVDLibraryDaoException{
         view.bar();
         view.displayShowDVDBanner();

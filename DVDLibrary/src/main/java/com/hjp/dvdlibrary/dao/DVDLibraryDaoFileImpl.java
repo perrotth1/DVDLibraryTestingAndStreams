@@ -11,6 +11,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -157,6 +161,29 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDaoAgg {
             if(buffer.length() > 0) {
                 DVDList.add( unmarshalData( buffer ) );
             }
-        } 
+        }
+    }
+
+    @Override
+    public List<DVD> searchDVDByStudio(String _studio) {
+        return DVDList.stream()
+                .filter(dvd -> dvd.getStudio().equals(_studio))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public double getAverageAgeOfMovies() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        LocalDate today = LocalDate.now();
+
+        double averageDays = DVDList.stream()
+                .map(dvd -> LocalDate.parse(dvd.getReleaseDate(), formatter))
+                .mapToLong(releaseDate -> ChronoUnit.DAYS.between(releaseDate, today))
+                .average()
+                .getAsDouble();
+
+        System.out.println(averageDays);
+
+        return 0;
     }
 }
