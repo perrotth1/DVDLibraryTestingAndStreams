@@ -16,19 +16,19 @@ import java.io.FileNotFoundException;
  *
  * @author Henry Perrottet
  */
-public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
+public class DVDLibraryDaoFileImpl implements DVDLibraryDaoAgg {
     private final List<DVD> DVDList = new ArrayList<>();
     private final String DATA_FILE;
     private final String DELIMITER = "::";
-    
+
     public DVDLibraryDaoFileImpl(){
         this.DATA_FILE = "DVD_file.txt";
     }
-    
+
     public DVDLibraryDaoFileImpl(String _dataFile){
         this.DATA_FILE = _dataFile;
     }
-    
+
     public boolean checkDuplicate(DVD _DVD) throws DVDLibraryDaoException {
         loadDVDList();
         for(DVD dvd : DVDList){
@@ -38,7 +38,7 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
         }
         return false;
     }
-    
+
     @Override
     public DVD addDVD(DVD _DVD) throws DVDLibraryDaoException {
         loadDVDList();
@@ -98,7 +98,7 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
                 return dvd;
             }
         }
-        return null;       
+        return null;
     }
 
     @Override
@@ -112,19 +112,19 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
         }
         return results;
     }
-    
+
     public String marshalData(DVD _dvd) {
-        String line = _dvd.getTitle() + DELIMITER + _dvd.getReleaseDate() + DELIMITER 
-                        + _dvd.getRating() + DELIMITER + _dvd.getDirector() + DELIMITER 
+        String line = _dvd.getTitle() + DELIMITER + _dvd.getReleaseDate() + DELIMITER
+                        + _dvd.getRating() + DELIMITER + _dvd.getDirector() + DELIMITER
                         + _dvd.getStudio() + DELIMITER + _dvd.getNote();
         return line;
     }
-    
+
     public DVD unmarshalData(String _line) {
         String[] tokens = _line.split(DELIMITER);
         return( new DVD( tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], tokens[5] ) );
     }
-    
+
     public void storeDVDList() throws DVDLibraryDaoException {
         PrintWriter out;
         try {
@@ -133,14 +133,14 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
         catch(IOException e) {
             throw new DVDLibraryDaoException( "Unable to Write File" );
         }
-        
+
         for( DVD dvd : DVDList ){
             out.println( marshalData( dvd ) );
         }
-        
+
         out.close();
     }
-    
+
     public void loadDVDList() throws DVDLibraryDaoException {
         Scanner in;
         try {
@@ -150,7 +150,7 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
             throw new DVDLibraryDaoException("Unable to Read File");
         }
         DVDList.clear();
-        
+
         String buffer;
         while( in.hasNextLine() ){
             buffer = in.nextLine();
