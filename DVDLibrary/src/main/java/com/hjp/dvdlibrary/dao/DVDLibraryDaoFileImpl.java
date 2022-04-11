@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 import java.time.LocalDate;
 import java.util.stream.Collectors;
+import java.util.Map;
 
 /**
  *
@@ -206,10 +207,10 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDaoAgg {
     }
 
     @Override
-    public List<DVD> getDVDByDirector(String _director) {
+    public Map<String, List<DVD>> getDVDByDirector(String _director) {
         return DVDList.stream()
                 .filter((p) -> p.getDirector().contains(_director) || p.getDirector().equalsIgnoreCase(_director))
-                .collect(Collectors.toList());
+                .collect(Collectors.groupingBy( (p) -> p.getRating() ));
     }
 
 }

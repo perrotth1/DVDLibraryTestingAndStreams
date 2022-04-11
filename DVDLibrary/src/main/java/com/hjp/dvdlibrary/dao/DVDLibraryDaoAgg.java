@@ -4,6 +4,7 @@ import java.util.List;
 import com.hjp.dvdlibrary.dto.*;
 import com.hjp.dvdlibrary.dto.DVD;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -13,7 +14,7 @@ public interface DVDLibraryDaoAgg extends DVDLibraryDao {
 
     List<DVD> getDVDInLastNYears(int _years);
     List<DVD> getDVDByRating(String _rating);
-    List<DVD> getDVDByDirector(String _director);
+    Map<String, List<DVD>> getDVDByDirector(String _director);
 
     /**
      *

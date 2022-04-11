@@ -18,7 +18,16 @@ public class DVDLibraryView {
     }
     public void displayMenu() {
         io.print(" === DVD COLLECTION MENU === ");
-        io.print(" 1) Add DVD \n 2) Remove DVD \n 3) Edit DVD \n 4) List DVDs \n 5) Show a DVD \n 6) Search DVDs \n 0) Exit \n");
+        io.print(" 1) Add DVD \n 2) Remove DVD \n 3) Edit DVD \n 4) List DVDs \n"
+                + " 5) Show a DVD \n 6) Search DVDs \n");
+        io.print(" 7) Get movies released in the last N years\n");
+        io.print(" 8) Get movies by MPAA rating\n");
+        io.print(" 9) Get movies by director\n");   
+        io.print(" 10) Get movies by studio\n");
+        io.print(" 11) Get average age of movies in collection\n");
+        io.print(" 12) Get newest movie in collection\n");
+        io.print(" 13) Get oldest movie in collection\n");
+        io.print(" 14) Get average number of notes associated with movies\n");
     }
     public int getSelection() {
         return io.readInt("Please Enter Selection >");
@@ -61,6 +70,11 @@ public class DVDLibraryView {
             printDVD(dvd);
         }
     }
+
+    public int readYearsForQuery(){
+        return io.readInt("Enter number of years N to show movies within last N years:");
+    }
+            
     public String readSearchTerm(){
         return io.readString("Please Enter Search Term: ");
     }
