@@ -82,10 +82,7 @@ public class DVDLibraryView {
         io.print("Search Results: ");
     }
     public boolean areYouSure(){
-        if( io.readString("Are You Sure? (y/n): ").equalsIgnoreCase("Y") ){
-            return true;
-        }
-        return false;
+        return io.readString("Are You Sure? (y/n): ").equalsIgnoreCase("Y");
     }
     public void displayDuplicate(){
         io.print("Identical DVD Already in Collection!");
@@ -125,5 +122,29 @@ public class DVDLibraryView {
     }
     public void displayError(String _msg){
         io.print("ERROR: " + _msg);
+    }
+    public void displayGetDVDInLastYearsBanner(){
+        io.print(" === GET DVDS WITHIN LAST N YEARS === \n");
+    }
+    public void displayGetDVDByRatingBanner(){
+        io.print(" === GET DVDS BY RATING === \n");
+    }
+    public void displayGetDVDSByDirectorBanner(){
+        io.print(" === GET DVDS BY DIRECTOR === \n");
+    }
+    public void displayGetDVDSByStudioBanner(){
+        io.print(" === GET DVDS BY SUDIO === \n");
+    }
+    public void displayGetAverageAgeBanner(){
+        io.print(" === GET AVERAGE AGE OF DVDS === \n");
+    }
+    public void displayGetNewestDVDBanner(){
+        io.print(" === GET NEWEST DVD === \n");
+    }
+    public void displayGetOldestDVDBanner(){
+        io.print(" === GET OLDEST DVD === \n");
+    }
+    public void displayGetAverageNotesBanner(){
+        io.print(" === GET AVERAGE NOTES === \n");
     }
 }

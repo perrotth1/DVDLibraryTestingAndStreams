@@ -12,9 +12,9 @@ import java.util.List;
  */
 public class DVDLibraryController {
     private DVDLibraryView view;
-    private DVDLibraryDao dao;
+    private DVDLibraryDaoAgg dao;
 
-    public DVDLibraryController(DVDLibraryView _view, DVDLibraryDao _dao) {
+    public DVDLibraryController(DVDLibraryView _view, DVDLibraryDaoAgg _dao) {
         this.view = _view;
         this.dao = _dao;
     }
@@ -42,6 +42,30 @@ public void run() {
                         break;
                     case 6:
                         searchDVD();
+                        break;
+                    case 7:
+                        getDVDInLastNYears();
+                        break;
+                    case 8:
+                        
+                        break;
+                    case 9:
+                        
+                        break;
+                    case 10:
+                        
+                        break;
+                    case 11:
+                        
+                        break;
+                    case 12:
+                        
+                        break;
+                    case 13:
+                        
+                        break;
+                    case 14:
+                        
                         break;
                     case 0:
                         keepGoing = false;
@@ -173,6 +197,15 @@ public void run() {
         List<DVD> results = dao.searchDVDByTitle( view.readSearchTerm() );
         view.displayShowingResults();
         view.listDVD( results );
+        view.displayContinue();
+    }
+    public void getDVDInLastNYears(){
+        view.bar();
+        view.displayGetDVDInLastYearsBanner();
+        int years = view.readYearsForQuery();
+        List<DVD> results = dao.getDVDInLastNYears(years);
+        view.displayShowingResults();
+        view.listDVD(results);
         view.displayContinue();
     }
 }

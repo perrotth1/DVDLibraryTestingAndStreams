@@ -12,7 +12,7 @@ public class App {
     public static void main(String[] args) {
         UserIO io = new UserIOConsoleImpl();
         DVDLibraryView view = new DVDLibraryView(io);
-        DVDLibraryDao dao = new DVDLibraryDaoFileImpl();
+        DVDLibraryDaoAgg dao = new DVDLibraryDaoFileImpl();
         DVDLibraryController controller = new DVDLibraryController(view, dao);
         
         controller.run();
