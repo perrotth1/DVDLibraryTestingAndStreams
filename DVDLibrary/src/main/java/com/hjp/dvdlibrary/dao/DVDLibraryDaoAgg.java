@@ -1,10 +1,17 @@
 package com.hjp.dvdlibrary.dao;
 
+import java.util.List;
+import com.hjp.dvdlibrary.dto.*;
 /**
  *
  * @author Henry
  */
 public interface DVDLibraryDaoAgg extends DVDLibraryDao {
+    
+    List<DVD> getDVDInLastNYears(int _years);
+    List<DVD> getDVDByRating(String _rating);
+    List<DVD> getDVDByDirector(String _director);
+    
     /**
      * 
     Find all movies released in the last N years
